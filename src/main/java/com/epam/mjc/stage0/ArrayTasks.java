@@ -1,7 +1,5 @@
 package com.epam.mjc.stage0;
 
-import java.util.ArrayList;
-
 /**
  * Here are the tasks for working with the arrays.
  * <p>
@@ -13,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-        return new String[] {"winter", "spring", "summer", "autumn"};
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -31,7 +29,7 @@ public class ArrayTasks {
         for (int i = 0; i < length; i++) {
             arrOfNumbers[i] = i + 1;
         }
-        return  arrOfNumbers;
+        return arrOfNumbers;
     }
 
     /**
@@ -94,10 +92,10 @@ public class ArrayTasks {
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
         int count = 0;
-        for (int i: arr) if (i > 0) count++;
+        for (int i : arr) if (i > 0) count++;
         int[] arr2 = new int[count];
         int j = 0;
-        for (int i: arr) {
+        for (int i : arr) {
             if (i > 0) {
                 arr2[j] = i;
                 j++;
@@ -117,19 +115,40 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-        int rows = 0;
-        int length = 0;
+
+        int[][] result = new int[arr.length][];
 
         for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
+            result[i] = arr[i];
 
-                length++;
+            int temp;
+            boolean sorted = false;
+            while (!sorted) {
+                sorted = true;
+                for (int j = 0; j < arr[i].length - 1; j++) {
+                    if (result[i][j] > result[i][j + 1]) {
+                        temp = result[i][j];
+                        result[i][j] = result[i][j + 1];
+                        result[i][j + 1] = temp;
+                        sorted = false;
+                    }
+                }
             }
-            rows++;
         }
 
-        int result[][] = new int[][]{};
-
+        int[] temp;
+        boolean sorted = false;
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < result.length - 1; i++) {
+                if (result[i].length > result[i + 1].length) {
+                    temp = result[i];
+                    result[i] = result[i + 1];
+                    result[i + 1] = temp;
+                    sorted = false;
+                }
+            }
+        }
         return result;
     }
 }
